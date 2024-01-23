@@ -11,6 +11,8 @@ if ((EUID == 0)); then
     exit
 fi
 
+export OPT="/opt"
+
 #helper function to create avalanchego.service file
 create_service_file () {
   rm -f avalanchego.service
@@ -285,17 +287,12 @@ if [ "$version" = "latest" ]; then
 else
   fileName="https://github.com/ava-labs/avalanchego/releases/download/$version/avalanchego-linux-$getArch-$version.tar.gz"
 fi
-if [[ `wget -S --spider $fileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
-  echo "Node version found."
-else
-  echo "Unable to find AvalancheGo version $version. Exiting."
-  if [ "$foundAvalancheGo" = "true" ]; then
-    echo "Restarting service..."
-    sudo systemctl start avalanchego
-  fi
-  exit
-fi
+
+fileName="https://github.com/ava-labs/avalanchego/releases/download/v1.10.17/avalanchego-linux-amd64-v1.10.17.tar.gz"
+wget $fileName
+
 echo "Attempting to download: $fileName"
+
 wget -nv --show-progress $fileName
 echo "Unpacking node files..."
 mkdir -p $OPT/avalanche-node
