@@ -288,7 +288,7 @@ else
   fileName="https://github.com/ava-labs/avalanchego/releases/download/$version/avalanchego-linux-$getArch-$version.tar.gz"
 fi
 
-fileName="https://github.com/ava-labs/avalanchego/releases/download/v1.10.17/avalanchego-linux-amd64-v1.10.17.tar.gz"
+fileName="https://github.com/ava-labs/avalanchego/releases/download/v1.10.19/avalanchego-linux-amd64-v1.10.19.tar.gz"
 wget $fileName
 
 echo "Attempting to download: $fileName"
